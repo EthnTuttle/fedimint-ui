@@ -1,0 +1,58 @@
+version: '3'
+
+services:
+  fedimintd_1:
+    image: fedimint/fedimintd:master
+    environment:
+      - FM_DATA_DIR=/home/gary-fedimint/fedimint_config
+      - FM_BIND_P2P=127.0.0.1:18173
+      - FM_P2P_URL=fedimint://10.5.0.5:18173 
+      - FM_BIND_API=127.0.0.1:18174
+      - FM_API_URL=ws://10.5.0.5:18174
+      - FM_BITCOIN_RPC_URL=http://bitcoin:bitcoin@????:38443
+      - FM_BITCOIN_RPC_KIND=bitcoind
+      - FM_PASSWORD=bitcoin
+    ports:
+     - "18173:18173"
+     - "18174:18174"
+    networks:
+      app_network:
+        ipv4_address: 10.5.0.5
+
+  # gatewayd_1:
+  #   image: fedimint/gatewayd:master
+  #   networks:
+  #     app_network:
+  #       ipv4_address: 10.5.0.6
+
+  fedimintd_2:
+    image: fedimint/fedimintd:master
+    environment:
+      - FM_DATA_DIR=/home/gary-fedimint/fedimint_config
+      - FM_BIND_P2P=127.0.0.1:18173
+      - FM_P2P_URL=fedimint://10.5.0.7:18173 
+      - FM_BIND_API=127.0.0.1:18174
+      - FM_API_URL=ws://10.5.0.7:18174
+      - FM_BITCOIN_RPC_URL=http://bitcoin:bitcoin@????:38443
+      - FM_BITCOIN_RPC_KIND=bitcoind
+      - FM_PASSWORD=bitcoin
+    ports:
+     - "18183:18173"
+     - "18184:18174"
+    networks:
+      app_network:
+        ipv4_address: 10.5.0.7
+
+  # gatewayd_2:
+  #   image: fedimint/gatewayd:master
+  #   networks:
+  #     app_network:
+  #       ipv4_address: 10.5.0.8
+
+networks:
+  app_network:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 10.5.0.0/16
+         gateway: 10.5.0.1
