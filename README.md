@@ -1,5 +1,12 @@
 # Fedimint UI Projects
 
+## Quick start
+
+1. Need Docker installed
+1. From root dir run `docker-compose up`. This starts the fedimint backend.
+1. Open a new shell, and `cd apps/gaurdian-ui`
+1. Run `REACT_APP_FM_CONFIG_API="ws://127.0.0.1:18174" yarn dev`
+
 ## What's Inside
 
 This project includes the following apps / packages:
