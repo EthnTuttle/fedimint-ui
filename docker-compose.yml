@@ -4,7 +4,7 @@ services:
   fedimintd_1:
     image: fedimint/fedimintd:master
     environment:
-      - FM_DATA_DIR=/home/gary-fedimint/fedimint_config
+      - FM_DATA_DIR=/data
       - FM_BIND_P2P=0.0.0.0:18173
       - FM_P2P_URL=fedimint://10.5.0.5:18173 
       - FM_BIND_API=0.0.0.0:18174
@@ -18,6 +18,8 @@ services:
     networks:
       app_network:
         ipv4_address: 10.5.0.5
+    volumes:
+      - ./fm_1/data:/data
 
   # gatewayd_1:
   #   image: fedimint/gatewayd:master
@@ -28,7 +30,7 @@ services:
   fedimintd_2:
     image: fedimint/fedimintd:master
     environment:
-      - FM_DATA_DIR=/home/gary-fedimint/fedimint_config
+      - FM_DATA_DIR=/data
       - FM_BIND_P2P=0.0.0.0:18173
       - FM_P2P_URL=fedimint://10.5.0.7:18173 
       - FM_BIND_API=0.0.0.0:18184
@@ -42,6 +44,8 @@ services:
     networks:
       app_network:
         ipv4_address: 10.5.0.7
+    volumes:
+      - ./fm_2/data:/data
 
   # gatewayd_2:
   #   image: fedimint/gatewayd:master
