@@ -2,10 +2,11 @@
 
 ## Quick start
 
-1. Need Docker installed
-1. From root dir run `docker-compose up`. This starts the fedimint backend.
-1. Open a new shell, and `cd apps/gaurdian-ui`
-1. Run `REACT_APP_FM_CONFIG_API="ws://127.0.0.1:18174" yarn dev`
+1. Install (Docker)[https://www.docker.com/]
+1. From repo root run `docker-compose up`. This starts the Fedimint backend with two federation servers.
+1. Open a new shell, and `cd apps/gaurdian-ui`. This folder is the setup UI for configuring a new federation.
+1. Run `REACT_APP_FM_CONFIG_API="ws://127.0.0.1:18174" yarn dev`. This starts the UI connecting to the first federation server.
+1. Run `REACT_APP_FM_CONFIG_API="ws://127.0.0.1:18184" yarn dev`. This starts the UI connecting to the second federation server.
 
 ## What's Inside
 
@@ -36,3 +37,12 @@ From root repo directory:
 > - `yarn format` - Fixes formatting in all apps and packages in the project
 
 Alternatively, you can navigate to a specific app or package within `fedimint-ui/` directory and run it's respective development commands
+
+### Using (mprocs)[https://github.com/pvolok/mprocs]
+
+1. (Install mprocs)[https://github.com/pvolok/mprocs#installation]
+1. Run `mprocs -c mprocs.yml` - This simulates the QuickStart start using mprocs
+
+### Adding more federation servers
+
+<!-- TODO -->
