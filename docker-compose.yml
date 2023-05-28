@@ -11,15 +11,13 @@ services:
       - FM_API_URL=ws://10.5.0.5:18174
       - FM_BITCOIN_RPC_URL=http://bitcoin:bitcoin@10.5.0.9:43782
       - FM_BITCOIN_RPC_KIND=bitcoind
-      - FM_PASSWORD=bitcoin
     ports:
-     - "18173:18173"
      - "18174:18174"
+    volumes:
+      - ./fm_1/data:/data
     networks:
       app_network:
         ipv4_address: 10.5.0.5
-    volumes:
-      - ./fm_1/data:/data
 
   # gatewayd_1:
   #   image: fedimint/gatewayd:master
@@ -37,9 +35,7 @@ services:
       - FM_API_URL=ws://10.5.0.7:18184
       - FM_BITCOIN_RPC_URL=http://bitcoin:bitcoin@10.5.0.9:43782
       - FM_BITCOIN_RPC_KIND=bitcoind
-      - FM_PASSWORD=bitcoin
     ports:
-     - "18183:18173"
      - "18184:18184"
     networks:
       app_network:
@@ -54,7 +50,6 @@ services:
   #       ipv4_address: 10.5.0.8
 
   bitcoind:
-    restart: always
     container_name: btcpayserver_bitcoind
     image: btcpayserver/bitcoin:0.18.0-1
     environment:
