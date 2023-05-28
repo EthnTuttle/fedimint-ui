@@ -1,6 +1,9 @@
 procs:
   run-ui-federation:
     shell: docker compose up 
+  teardown-ui-federation:
+    shell: docker compose down
+    autostart: false 
   coordinator:
     cwd: apps/guardian-ui/
     shell: yarn dev
