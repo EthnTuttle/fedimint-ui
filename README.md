@@ -7,6 +7,7 @@
 1. Open a new shell, and `cd apps/gaurdian-ui`. This folder is the setup UI for configuring a new federation.
 1. Run `REACT_APP_FM_CONFIG_API="ws://127.0.0.1:18174" yarn dev`. This starts the UI connecting to the first federation server.
 1. Run `REACT_APP_FM_CONFIG_API="ws://127.0.0.1:18184" yarn dev`. This starts the UI connecting to the second federation server.
+1. To tear down, run `docker-compose down`
 
 ## What's Inside
 
