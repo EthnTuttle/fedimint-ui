@@ -19,11 +19,32 @@ services:
       app_network:
         ipv4_address: 10.5.0.5
 
-  # gatewayd_1:
-  #   image: fedimint/gatewayd:master
-  #   networks:
-  #     app_network:
-  #       ipv4_address: 10.5.0.6
+  gatewayd_1:
+    image: fedimint/gatewayd:master
+    environment:
+      # Path to folder containing gateway config and data files
+      - FM_GATEWAY_DATA_DIR=/gateway_data
+      # Gateway webserver listen address
+      - FM_GATEWAY_LISTEN_ADDR=0.0.0.0:8175
+      # Public URL from which the webserver API is reachable
+      - FM_GATEWAY_API_ADDR=ws://10.5.0.6:8175
+      # Gateway webserver authentication password
+      - FM_GATEWAY_PASSWORD=thereisnosecondbest
+      # Configured gateway routing fees Format: <base_msat>,<proportional_millionths>
+      - FM_GATEWAY_FEES=0,1000
+      # LND RPC address
+      - FM_LND_RPC_ADDR
+      # LND TLS cert file path
+      - FM_LND_TLS_CERT
+      # LND macaroon file path
+      - FM_LND_MACAROON
+    volumes:
+      - ./fm_1/gateway_data:/gateway_data
+    ports:
+      - "8175:8175"
+    networks:
+      app_network:
+        ipv4_address: 10.5.0.6
 
   fedimintd_2:
     image: fedimint/fedimintd:master
@@ -51,7 +72,7 @@ services:
 
   bitcoind:
     container_name: btcpayserver_bitcoind
-    image: btcpayserver/bitcoin:0.18.0-1
+    image: btcpayserver/bitcoin:24.1
     environment:
       BITCOIN_NETWORK: regtest
       BITCOIN_EXTRA_ARGS: |
